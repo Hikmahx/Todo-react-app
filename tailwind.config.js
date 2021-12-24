@@ -2,7 +2,15 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   darkMode: 'class',
   theme: {
-    extend: {},
+    extend: {
+      letterSpacing: {
+        wider : '.2em',
+        widest : '.4em',
+      }, 
+      fontSize:{
+        '4xl' : '2.5rem'
+      }
+    },
     fontFamily:{
       josefinSans:['"Josefin Sans"', 'san-serif'],
     },
