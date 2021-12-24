@@ -18,7 +18,7 @@ function App() {
 
   return( 
   <div className='App bg-gray dark:bg-very-dark-blue font-josefinSans'>
-    <Navbar modeToggle={modeToggle}/>
+    <Navbar modeToggle={modeToggle} darkMode={darkMode} />
   </div>
   )
 }

@@ -6,7 +6,8 @@ import bgDesktopDark from '../assets/bg-desktop-dark.jpg'
 import moon from '../assets/icon-moon.svg'
 
 
-const Navbar = ({modeToggle}) => {
+const Navbar = ({modeToggle, darkMode}) => {
+
   return (
     <header className="w-full relative flex justify-center">
       <div className="header-background">
