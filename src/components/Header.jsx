@@ -7,7 +7,7 @@ import moon from '../assets/icon-moon.svg'
 import sun from '../assets/icon-sun.svg'
 
 
-const Navbar = ({modeToggle, darkMode}) => {
+const Header = ({modeToggle, darkMode}) => {
 
   return (
     <header className="w-full relative flex justify-center">
@@ -24,4 +24,4 @@ const Navbar = ({modeToggle, darkMode}) => {
   )
 }
 
-export default Navbar
+export default Header
