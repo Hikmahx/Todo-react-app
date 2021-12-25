@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Header from './components/Header'
+import Form from './components/Form'
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
   return( 
   <div className='App bg-gray dark:bg-very-dark-blue font-josefinSans'>
     <Header modeToggle={modeToggle} darkMode={darkMode} />
+    <Form />
   </div>
   )
 }
