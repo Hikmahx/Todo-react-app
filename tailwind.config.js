@@ -32,7 +32,7 @@ module.exports = {
       'dark-grayish-blue-dark': '#777a92',
       'very-dark-grayish-blue-dark': '#4d5066',
       'darkest-grayish-blue': '#393a4c',
-      'black':'#000000',
+      'transparent':'transparent',
     }
   },
   plugins: [],
