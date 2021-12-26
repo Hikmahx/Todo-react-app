@@ -19,7 +19,7 @@ function App() {
   const [darkMode, setDarkMode] = useState(true)
 
   return( 
-  <div className='App bg-gray dark:bg-very-dark-blue font-josefinSans'>
+  <div className='App bg-gray dark:bg-very-dark-blue font-josefinSans min-h-screen'>
     <Header modeToggle={modeToggle} darkMode={darkMode} />
     <Form />
     <Todos/>
