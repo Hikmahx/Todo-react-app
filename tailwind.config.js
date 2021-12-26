@@ -9,6 +9,12 @@ module.exports = {
       }, 
       fontSize:{
         '4xl' : '2.5rem'
+      },
+      borderWidth:{
+        DEFAULT : '1px'
+      }, 
+      margin:{
+        '7' : '1.6rem'
       }
     },
     fontFamily:{
