@@ -35,14 +35,30 @@ function App() {
     }
   }
 
-  const [checked, setChecked] = useState(true)
+  const inputTodo = (e) =>{
+    
+    setInput(e.target.value)
+  }
 
+  const submitTodo= (e)=>{
+      if(input !== ''){
+        setTodos([...todos, input])
+      }
+      setInput('')
+    e.preventDefault()
+  }
+
+
+  const [checked, setChecked] = useState(true)
   const [darkMode, setDarkMode] = useState(true)
+  const [input, setInput] = useState('')
+  const [todos, setTodos] = useState ([])
+
 
   return( 
   <div className='App bg-gray dark:bg-very-dark-blue font-josefinSans min-h-screen'>
     <Header modeToggle={modeToggle} darkMode={darkMode} />
-    <Form />
+    <Form submitTodo={submitTodo} inputTodo={inputTodo} input={input}/>
     <Todos checkBox={checkBox}/>
   </div>
   )
