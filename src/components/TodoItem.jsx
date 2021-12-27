@@ -4,13 +4,13 @@ import pencil from "../assets/icon-pencil.svg"
 import cross from "../assets/icon-cross.svg"
 
 
-const TodoItem = () => {
+const TodoItem = ({checkBox}) => {
     return (
-        <li className="todo-item relative flex items-center h-12 lg:h-16 px-5 lg:px-6 w-full border-b border-light-grayish-blue dark:border-dark-grayish-blue-dark">
+        <li data-completed='false' className="todo-item relative flex items-center h-12 lg:h-16 px-5 lg:px-6 w-full border-b border-light-grayish-blue dark:border-dark-grayish-blue-dark">
         <span  className="checkbox-wrapper relative cursor-pointer z-10">
           <div className=" relative bg-very-light-grayish-blue dark:bg-very-dark-grayish-blue-dark hover:bg-gradient-to-r hover:from-gradient-blue hover:to-gradient-purple transition-colors rounded-full w-5 h-5 lg:w-6 lg:h-6 flex items-center justify-center">
             <img src={check} alt="check-icon" className="w-2 h-2 lg:w-3 lg:h-3" />
-            <div className=" checkbox absolute inset-0 bg-white dark:bg-very-dark-desaturated-blue transition-colors w-4 h-4 lg:w-5 lg:h-5 rounded-full m-auto"></div>
+            <div onClick={checkBox} className=" checkbox absolute inset-0 bg-white dark:bg-very-dark-desaturated-blue transition-colors w-4 h-4 lg:w-5 lg:h-5 rounded-full m-auto"></div>
           </div>
         </span>         
         <p className="todo-task relative px-3 lg:px-6 z-10">Wash my car</p>
