@@ -59,7 +59,7 @@ function App() {
   <div className='App bg-gray dark:bg-very-dark-blue font-josefinSans min-h-screen'>
     <Header modeToggle={modeToggle} darkMode={darkMode} />
     <Form submitTodo={submitTodo} inputTodo={inputTodo} input={input}/>
-    <Todos checkBox={checkBox}/>
+    <Todos todos={todos} checkBox={checkBox}/>
   </div>
   )
 }
