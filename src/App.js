@@ -55,9 +55,21 @@ function App() {
     setInput(e.target.value)
   }
 
-  const submitTodo= (e)=>{
+  const submitTodo= async (e)=>{
       if(input !== ''){
-        setTodos([...todos, input])
+        const res = await fetch('http://localhost:3000/todos', {
+          method: 'POST', 
+          headers:{
+            "Content-type" : 'application/json', 
+          }, 
+          body: JSON.stringify({
+            todo: input, 
+          })
+        })
+
+        const data = await res.json()
+
+        // setTodos([...todos, input])
       }
       setInput('')
     e.preventDefault()
