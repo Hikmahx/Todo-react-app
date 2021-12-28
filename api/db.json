@@ -1,34 +1,28 @@
 {
-  "todos":[
+  "todos": [
     {
-      "id":1, 
-      "todo": "complete online JavaScript course", 
-      "completed" : true
+      "id": 1,
+      "todo": "complete online JavaScript course"
     },
     {
-      "id":2, 
-      "todo": "jog around the park 3x", 
-      "completed" : false
+      "id": 2,
+      "todo": "jog around the park 3x"
     },
     {
-      "id":3, 
-      "todo": "10 minutes meditation", 
-      "completed" : false
+      "id": 3,
+      "todo": "10 minutes meditation"
     },
     {
-      "id":4, 
-      "todo": "read for 1 hour", 
-      "completed" : false
+      "id": 4,
+      "todo": "read for 1 hour"
     },
     {
-      "id":5, 
-      "todo": "pick up groceries", 
-      "completed" : false
+      "id": 5,
+      "todo": "pick up groceries"
     },
     {
-      "id":6, 
-      "todo": "complete Todo App on Frontend Mentor", 
-      "completed" : false
+      "id": 6,
+      "todo": "complete Todo App on Frontend Mentor"
     }
   ]
 }
