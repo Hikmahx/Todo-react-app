@@ -1,9 +1,24 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Header from './components/Header'
 import Form from './components/Form'
 import Todos from './components/Todos'
 
 function App() {
+
+  useEffect(() => {
+    getData();
+    // eslint-disable-next-line
+  }, []);
+  
+  const getData = async ()=>{
+    try {
+      const res = await fetch('http://localhost:3000/todos')
+      const data = await res.json()
+      setTodos(data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   const modeToggle =()=>{
     setDarkMode(!darkMode)
@@ -24,12 +39,12 @@ function App() {
     
     li.dataset.completed = checked
     if(checked){
-      e.target.style.backgroundColor= 'transparent'
+      e.target.classList.add('bg-transparent')
       e.target.parentElement.classList.add('bg-gradient-to-r', 'from-gradient-blue', 'to-gradient-purple')
       p.classList.add('line-through', 'text-light-grayish-blue')
     }
     if(!checked){
-      e.target.style.backgroundColor= ''
+      e.target.classList.remove('bg-transparent')
       e.target.parentElement.classList.remove('bg-gradient-to-r', 'from-gradient-blue', 'to-gradient-purple')
       p.classList.remove('line-through', 'text-light-grayish-blue')
     }
