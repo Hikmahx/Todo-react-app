@@ -16,7 +16,8 @@ function App() {
       const data = await res.json()
       setTodos(data)
     } catch (error) {
-      console.log(error)
+      setError(true)
+      setErrMessage(error.message)
     }
   }
 
@@ -80,13 +81,15 @@ function App() {
   const [darkMode, setDarkMode] = useState(true)
   const [input, setInput] = useState('')
   const [todos, setTodos] = useState ([])
+  const [error, setError] = useState(false)
+  const [errMessage, setErrMessage] = useState('')
 
 
   return( 
   <div className='App bg-gray dark:bg-very-dark-blue font-josefinSans min-h-screen'>
     <Header modeToggle={modeToggle} darkMode={darkMode} />
     <Form submitTodo={submitTodo} inputTodo={inputTodo} input={input}/>
-    <Todos todos={todos} checkBox={checkBox}/>
+    <Todos todos={todos} checkBox={checkBox} error={error} errMessage={errMessage} />
   </div>
   )
 }
