@@ -3,7 +3,13 @@ import Header from './components/Header'
 import Form from './components/Form'
 import Todos from './components/Todos'
 
-function App() {
+function App() { 
+  const [todos, setTodos] = useState ([])
+  const [checked, setChecked] = useState(true)
+  const [darkMode, setDarkMode] = useState(true)
+  const [input, setInput] = useState('')
+  const [error, setError] = useState(false)
+  const [errMessage, setErrMessage] = useState('') 
 
   useEffect(() => {
     getData();
@@ -19,6 +25,31 @@ function App() {
       setError(true)
       setErrMessage(error.message)
     }
+  }
+  
+  const inputTodo = (e) =>{
+    
+    setInput(e.target.value)
+  }
+
+  const submitTodo= async (e)=>{
+      if(input !== ''){
+        const res = await fetch('http://localhost:3000/todos', {
+          method: 'POST', 
+          headers:{
+            "Content-type" : 'application/json', 
+          }, 
+          body: JSON.stringify({
+            todo: input, 
+          })
+        })
+
+        const data = await res.json()
+
+        // setTodos([...todos, input])
+      }
+      setInput('')
+    e.preventDefault()
   }
 
   const modeToggle =()=>{
@@ -50,39 +81,6 @@ function App() {
       p.classList.remove('line-through', 'text-light-grayish-blue')
     }
   }
-
-  const inputTodo = (e) =>{
-    
-    setInput(e.target.value)
-  }
-
-  const submitTodo= async (e)=>{
-      if(input !== ''){
-        const res = await fetch('http://localhost:3000/todos', {
-          method: 'POST', 
-          headers:{
-            "Content-type" : 'application/json', 
-          }, 
-          body: JSON.stringify({
-            todo: input, 
-          })
-        })
-
-        const data = await res.json()
-
-        // setTodos([...todos, input])
-      }
-      setInput('')
-    e.preventDefault()
-  }
-
-
-  const [checked, setChecked] = useState(true)
-  const [darkMode, setDarkMode] = useState(true)
-  const [input, setInput] = useState('')
-  const [todos, setTodos] = useState ([])
-  const [error, setError] = useState(false)
-  const [errMessage, setErrMessage] = useState('')
 
 
   return( 
