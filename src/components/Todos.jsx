@@ -9,7 +9,7 @@ const Todos = ({checkBox, todos, error, errMessage}) => {
       <div style={{maxWidth:"34rem"}} className='mx-auto mt-7 text-xs sm:text-base lg:text-lg text-darkest-grayish-blue dark:text-gray'>
         <ul className="w-full flex flex-col items-center relative bg-white dark:bg-very-dark-desaturated-blue transition-colors shadow-xl rounded">
         {todos.map(todo=>(
-          <TodoItem checkBox={checkBox} todo={todo} error={error} errMessage={errMessage} />
+          <TodoItem key={todo.id} checkBox={checkBox} todo={todo} error={error} errMessage={errMessage} />
         ))}
           {todos.length > 0 ? 
           <li className="flex items-center justify-between h-12 px-5 lg:px-6 w-full text-xs lg:text-sm text-dark-grayish-blue dark:text-dark-grayish-blue-dark">
