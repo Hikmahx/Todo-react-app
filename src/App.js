@@ -40,16 +40,32 @@ function App() {
             "Content-type" : 'application/json', 
           }, 
           body: JSON.stringify({
-            todo: input, 
+            todo: input
           })
         })
 
-        const data = await res.json()
-        setTodos(data)
+        // const data = await res.json()
+        // setTodos(data)
         // setTodos([...todos, input])
+        getData()
       }
       setInput('')
     e.preventDefault()
+  }
+
+  const deleteTodo= async (e)=>{
+    let id = e.target.parentElement.parentElement.dataset.id
+    // console.log(e.target.parentElement.parentElement.dataset.id)
+    // setTodos(todos.filter((todo)=>todo!==item)) 
+
+    const res = await fetch(`http://localhost:3000/todos/${id}`, {
+      method: 'DELETE', 
+      headers:{
+        "Content-type" : 'application/json', 
+      }
+    })
+
+    getData()
   }
 
   const modeToggle =()=>{
@@ -87,7 +103,7 @@ function App() {
   <div className='App bg-gray dark:bg-very-dark-blue font-josefinSans min-h-screen'>
     <Header modeToggle={modeToggle} darkMode={darkMode} />
     <Form submitTodo={submitTodo} inputTodo={inputTodo} input={input}/>
-    <Todos todos={todos} checkBox={checkBox} error={error} errMessage={errMessage} />
+    <Todos todos={todos} checkBox={checkBox} error={error} errMessage={errMessage} deleteTodo={deleteTodo} />
   </div>
   )
 }

@@ -4,10 +4,10 @@ import pencil from "../assets/icon-pencil.svg"
 import cross from "../assets/icon-cross.svg"
 
 
-const TodoItem = ({checkBox, todo, error, errMessage}) => {  
+const TodoItem = ({checkBox, todo, error, errMessage, deleteTodo}) => {  
   if(!error){
     return (
-      <li data-completed='false' className="todo-item relative flex items-center h-12 lg:h-16 px-5 lg:px-6 w-full border-b border-light-grayish-blue dark:border-dark-grayish-blue-dark">
+      <li data-completed='false' data-id={todo.id} className="todo-item relative flex items-center h-12 lg:h-16 px-5 lg:px-6 w-full border-b border-light-grayish-blue dark:border-dark-grayish-blue-dark">
       <span  className="checkbox-wrapper relative cursor-pointer z-10">
         <div className={" relative bg-very-light-grayish-blue dark:bg-very-dark-grayish-blue-dark hover:bg-gradient-to-r hover:from-gradient-blue hover:to-gradient-purple transition-colors rounded-full w-5 h-5 lg:w-6 lg:h-6 flex items-center justify-center" + (todo.completed ===true? ' bg-gradient-to-r from-gradient-blue to-gradient-purple':'')} >
           <img src={check} alt="check-icon" className="w-2 h-2 lg:w-3 lg:h-3"/>
@@ -17,7 +17,7 @@ const TodoItem = ({checkBox, todo, error, errMessage}) => {
       <p className={"todo-task relative px-3 lg:px-6 z-10 first-letter:capitalize" + (todo.completed ===true? ' line-through text-light-grayish-blue':'')} >{todo.todo}</p>
       <div className="action absolute inset-0 lg:opacity-0 lg:hover:opacity-100 mr-4 lg:mr-3 flex justify-end items-center">
         <img src={pencil} alt="check-icon" className="w-5 h-5 lg:w-6 lg:h-6 m-2 lg:m-3 cursor-pointer" />
-        <img src={cross} alt="check-icon" className="w-5 h-5 lg:w-6 lg:h-6 m-2 lg:m-3 cursor-pointer" />            
+        <img onClick={deleteTodo} src={cross} alt="check-icon" className="w-5 h-5 lg:w-6 lg:h-6 m-2 lg:m-3 cursor-pointer" />            
       </div>
       </li>
     )
