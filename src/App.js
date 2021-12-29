@@ -45,7 +45,7 @@ function App() {
         })
 
         const data = await res.json()
-
+        setTodos(data)
         // setTodos([...todos, input])
       }
       setInput('')
