@@ -2,14 +2,14 @@ import React from 'react'
 import TodoItem from '../components/TodoItem'
 
 
-const Todos = ({checkBox, todos, error, errMessage, deleteTodo}) => {
+const Todos = ({checkBox, todos, error, errMessage, deleteTodo, updateTodo}) => {
   
   return (
     <div className="todo-container mx-6 pb-10">
       <div style={{maxWidth:"34rem"}} className='mx-auto mt-7 text-xs sm:text-base lg:text-lg text-darkest-grayish-blue dark:text-gray'>
         <ul className="w-full flex flex-col items-center relative bg-white dark:bg-very-dark-desaturated-blue transition-colors shadow-xl rounded">
         {todos.map(todo=>(
-          <TodoItem key={todo.id} checkBox={checkBox} todo={todo} error={error} errMessage={errMessage} deleteTodo={deleteTodo} />
+          <TodoItem key={todo.id} checkBox={checkBox} todo={todo} error={error} errMessage={errMessage} deleteTodo={deleteTodo} updateTodo={updateTodo} />
         ))}
           {todos.length > 0 ? 
           <li className="flex items-center justify-between h-12 px-5 lg:px-6 w-full text-xs lg:text-sm text-dark-grayish-blue dark:text-dark-grayish-blue-dark">

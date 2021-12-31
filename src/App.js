@@ -10,6 +10,7 @@ function App() {
   const [input, setInput] = useState('')
   const [error, setError] = useState(false)
   const [errMessage, setErrMessage] = useState('') 
+  const [id, setId] = useState('')
 
   useEffect(() => {
     getData();
@@ -34,23 +35,45 @@ function App() {
 
   const submitTodo= async (e)=>{
       if(input !== ''){
-        const res = await fetch('http://localhost:3000/todos', {
-          method: 'POST', 
-          headers:{
-            "Content-type" : 'application/json', 
-          }, 
-          body: JSON.stringify({
-            todo: input
-          })
-        })
 
-        // const data = await res.json()
-        // setTodos(data)
+        if(id===''){
+          const res = await fetch('http://localhost:3000/todos', {
+            method: 'POST', 
+            headers:{
+              "Content-type" : 'application/json', 
+            }, 
+            body: JSON.stringify({
+              todo: input
+            })
+          })
+          getData()
+        }else{
+
+          const res = await fetch(`http://localhost:3000/todos/${id}`, {
+            method: 'PUT', 
+            headers:{
+              "Content-type" : 'application/json', 
+            }, 
+            body: JSON.stringify({
+              todo:input
+            })
+            
+          })
+          const data = await res.json()
+          // setTodos(data)    
+          getData()  
+      }
         // setTodos([...todos, input])
-        getData()
       }
       setInput('')
     e.preventDefault()
+  }
+
+  const updateTodo = async (e)=>{
+    let id = e.target.parentElement.parentElement.dataset.id
+    let p = e.target.parentElement.previousElementSibling.textContent
+    setInput(p)
+    setId(id)
   }
 
   const deleteTodo= async (e)=>{
@@ -103,7 +126,7 @@ function App() {
   <div className='App bg-gray dark:bg-very-dark-blue font-josefinSans min-h-screen'>
     <Header modeToggle={modeToggle} darkMode={darkMode} />
     <Form submitTodo={submitTodo} inputTodo={inputTodo} input={input}/>
-    <Todos todos={todos} checkBox={checkBox} error={error} errMessage={errMessage} deleteTodo={deleteTodo} />
+    <Todos todos={todos} checkBox={checkBox} error={error} errMessage={errMessage} deleteTodo={deleteTodo} updateTodo={updateTodo}/>
   </div>
   )
 }
