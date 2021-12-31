@@ -55,6 +55,8 @@ function App() {
             reponse=> {
               // eslint-disable-next-line
               setTodos(todos.map(todo=>(todo.id==id? {id, todo:input} : todo)))
+              setId('')
+              document.querySelector('form').lastElementChild.remove()
             }
           )
         }
@@ -66,8 +68,23 @@ function App() {
   const updateTodo = async (e)=>{
     let id = e.target.parentElement.parentElement.dataset.id
     let p = e.target.parentElement.previousElementSibling.textContent
+    let cross = e.target.nextElementSibling
     setInput(p)
     setId(id)
+
+    let form = document.querySelector('form')
+    if(form.childElementCount > 2){
+      form.lastElementChild.remove()
+    }
+    let formCross = cross.cloneNode(true)
+    formCross.classList.add('form-cancel')
+    form.appendChild(formCross)
+    formCross.addEventListener('click', ()=>{
+      // console.log('working')
+      setId('')
+      setInput('')
+      form.lastElementChild.remove()
+    })
   }
 
   const deleteTodo=  (e)=>{
