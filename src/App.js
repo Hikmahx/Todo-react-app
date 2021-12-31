@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import axios from 'axios'
 import Header from './components/Header'
 import Form from './components/Form'
 import Todos from './components/Todos'
@@ -17,11 +18,13 @@ function App() {
     // eslint-disable-next-line
   }, []);
   
-  const getData = async ()=>{
+  const getData = ()=>{
     try {
-      const res = await fetch('http://localhost:3000/todos')
-      const data = await res.json()
-      setTodos(data)
+      axios.get('http://localhost:3000/todos')
+      .then(
+        reponse=> setTodos(reponse.data)
+      )
+      
     } catch (error) {
       setError(true)
       setErrMessage(error.message)
@@ -33,37 +36,28 @@ function App() {
     setInput(e.target.value)
   }
 
-  const submitTodo= async (e)=>{
+  const submitTodo= (e)=>{
       if(input !== ''){
 
         if(id===''){
-          const res = await fetch('http://localhost:3000/todos', {
-            method: 'POST', 
-            headers:{
-              "Content-type" : 'application/json', 
-            }, 
-            body: JSON.stringify({
-              todo: input
-            })
+          axios.post('http://localhost:3000/todos', {
+            todo: input
           })
-          getData()
+          .then(
+            reponse=> setTodos([...todos, reponse.data])
+          )
         }else{
 
-          const res = await fetch(`http://localhost:3000/todos/${id}`, {
-            method: 'PUT', 
-            headers:{
-              "Content-type" : 'application/json', 
-            }, 
-            body: JSON.stringify({
-              todo:input
-            })
-            
+          axios.put(`http://localhost:3000/todos/${id}`, {
+            todo:input
           })
-          const data = await res.json()
-          // setTodos(data)    
-          getData()  
-      }
-        // setTodos([...todos, input])
+          .then(
+            reponse=> {
+              // eslint-disable-next-line
+              setTodos(todos.map(todo=>(todo.id==id? {id, todo:input} : todo)))
+            }
+          )
+        }
       }
       setInput('')
     e.preventDefault()
@@ -76,19 +70,17 @@ function App() {
     setId(id)
   }
 
-  const deleteTodo= async (e)=>{
+  const deleteTodo=  (e)=>{
     let id = e.target.parentElement.parentElement.dataset.id
     // console.log(e.target.parentElement.parentElement.dataset.id)
     // setTodos(todos.filter((todo)=>todo!==item)) 
 
-    const res = await fetch(`http://localhost:3000/todos/${id}`, {
-      method: 'DELETE', 
-      headers:{
-        "Content-type" : 'application/json', 
+    axios.delete(`http://localhost:3000/todos/${id}`)
+    .then(
+      response=>{
+        setTodos(todos.filter((item)=> item !== todos[id-1]))
       }
-    })
-
-    getData()
+    )
   }
 
   const modeToggle =()=>{
