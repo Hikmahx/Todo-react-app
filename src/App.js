@@ -129,12 +129,12 @@ function App() {
     
     li.dataset.completed = checked
     if(checked){
-      e.target.classList.add('bg-transparent')
+      e.target.classList.add('bg-transparent', 'dark:bg-transparent')
       e.target.parentElement.classList.add('bg-gradient-to-r', 'from-gradient-blue', 'to-gradient-purple')
       p.classList.add('line-through', 'text-light-grayish-blue')
     }
     if(!checked){
-      e.target.classList.remove('bg-transparent')
+      e.target.classList.remove('bg-transparent', 'dark:bg-transparent')
       e.target.parentElement.classList.remove('bg-gradient-to-r', 'from-gradient-blue', 'to-gradient-purple')
       p.classList.remove('line-through', 'text-light-grayish-blue')
     }
