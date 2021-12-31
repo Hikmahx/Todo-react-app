@@ -41,7 +41,8 @@ function App() {
 
         if(id===''){
           axios.post('http://localhost:3000/todos', {
-            todo: input
+            todo: input, 
+            completed: false
           })
           .then(
             reponse=> setTodos([...todos, reponse.data])
@@ -49,7 +50,8 @@ function App() {
         }else{
 
           axios.put(`http://localhost:3000/todos/${id}`, {
-            todo:input
+            todo:input, 
+            completed:false
           })
           .then(
             reponse=> {
@@ -136,6 +138,16 @@ function App() {
       e.target.parentElement.classList.remove('bg-gradient-to-r', 'from-gradient-blue', 'to-gradient-purple')
       p.classList.remove('line-through', 'text-light-grayish-blue')
     }
+    
+    let text = e.target.parentElement.parentElement.nextElementSibling.textContent
+    let id = e.target.parentElement.parentElement.parentElement.dataset.id
+    axios.put(`http://localhost:3000/todos/${id}`, {
+      todo:text,
+      completed: checked
+    })
+    .then(response=>{
+      getData()
+    })
   }
 
 
