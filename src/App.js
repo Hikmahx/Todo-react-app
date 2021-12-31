@@ -56,8 +56,10 @@ function App() {
               // eslint-disable-next-line
               setTodos(todos.map(todo=>(todo.id==id? {id, todo:input} : todo)))
               setId('')
+              if(document.querySelector('form').lastElementChild === document.querySelector('.form-cancel')){
               document.querySelector('form').lastElementChild.remove()
             }
+           }
           )
         }
       }
@@ -95,7 +97,13 @@ function App() {
     axios.delete(`http://localhost:3000/todos/${id}`)
     .then(
       response=>{
-        setTodos(todos.filter((item)=> item !== todos[id-1]))
+        // setTodos(todos.filter((item)=> item !== todos[id-1]))
+        getData()
+        setId('')
+        setInput('')
+        if(document.querySelector('form').lastElementChild === document.querySelector('.form-cancel')){
+          document.querySelector('form').lastElementChild.remove()
+        }
       }
     )
   }
