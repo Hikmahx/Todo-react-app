@@ -18,7 +18,8 @@ function App() {
   useEffect(() => {
     getData();
     // eslint-disable-next-line
-    totalTodo()
+    totalTodo();
+    // eslint-disable-next-line
   }, []);
   
   const getData = ()=>{
@@ -46,7 +47,6 @@ function App() {
     })
 
     setTotal((todos.length-counter)/2)
-    console.log(counter)
   }
   
   const inputTodo = (e) =>{
@@ -168,12 +168,33 @@ function App() {
     })
   }
 
+  const clearCompleted= ()=>{
+    todos.forEach(todo=>{
+      if(todo.completed){
+        let id = todo.id
+
+        // SAME AS DELETETODO(), UPDATE THE DELETETODO() INORDER TO PASS IT IN HERE
+        axios.delete(`http://localhost:3000/todos/${id}`)
+        .then(
+          reponse=>{
+            getData()
+            setId('')
+            setInput('')
+            if(document.querySelector('form').lastElementChild === document.querySelector('.form-cancel')){
+              document.querySelector('form').lastElementChild.remove()
+            }    
+          }
+        )
+      }
+    })
+  }
+
 
   return( 
   <div className='App bg-gray dark:bg-very-dark-blue font-josefinSans min-h-screen'>
     <Header modeToggle={modeToggle} darkMode={darkMode} />
     <Form submitTodo={submitTodo} inputTodo={inputTodo} input={input}/>
-    <Todos todos={todos} checkBox={checkBox} error={error} errMessage={errMessage} deleteTodo={deleteTodo} updateTodo={updateTodo} totalTodo={totalTodo} total={total} />
+    <Todos todos={todos} checkBox={checkBox} error={error} errMessage={errMessage} deleteTodo={deleteTodo} updateTodo={updateTodo} totalTodo={totalTodo} total={total} clearCompleted={clearCompleted} />
   </div>
   )
 }

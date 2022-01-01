@@ -2,11 +2,12 @@ import React, {useEffect} from 'react'
 import TodoItem from '../components/TodoItem'
 
 
-const Todos = ({checkBox, todos, error, errMessage, deleteTodo, updateTodo, totalTodo, total}) => {
+const Todos = ({checkBox, todos, error, errMessage, deleteTodo, updateTodo, totalTodo, total, clearCompleted}) => {
 
 
   useEffect(() => {
     totalTodo()
+    // eslint-disable-next-line
   }, [todos])
 
 
@@ -47,7 +48,7 @@ const Todos = ({checkBox, todos, error, errMessage, deleteTodo, updateTodo, tota
               <p className="mx-3 cursor-pointer hover:text-darkest-grayish-blue dark:hover:text-gray">Active</p>
               <p className="mx-3 cursor-pointer hover:text-darkest-grayish-blue dark:hover:text-gray">Completed</p>
             </div>
-            <div className="clear-complete text-light-grayish-blue hover:text-dark-grayish-blue dark:text-dark-grayish-blue-dark dark:hover:text-gray cursor-pointer">Clear Completed</div>
+            <div onClick={clearCompleted} className="clear-complete text-light-grayish-blue hover:text-dark-grayish-blue dark:text-dark-grayish-blue-dark dark:hover:text-gray cursor-pointer">Clear Completed</div>
           </li>
           : null
           }   
