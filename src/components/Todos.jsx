@@ -1,19 +1,47 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import TodoItem from '../components/TodoItem'
 
 
-const Todos = ({checkBox, todos, error, errMessage, deleteTodo, updateTodo}) => {
+const Todos = ({checkBox, todos, error, errMessage, deleteTodo, updateTodo, totalTodo, total}) => {
+
+
+  useEffect(() => {
+    totalTodo()
+  }, [todos])
+
+
+  // const todoTotal = ()=>{
+
+  //   // todos.forEach((todo)=>{setTotal(total+1)})
+  //   console.log(todos.length)
+  //   // setTotal(todos.length)
+
+  //   todos.forEach(todo=>{
+  //     setTotal(total + 1)
+  //   })
+  // }
+
+  // todoTotal()
+
+  // const reducer = (state, action)=>{
+  //   return {count: state.count + 1}
+  // }
+
+  // const [state, dispatch] = useReducer(reducer, {count:0}, init)
+
+
   
   return (
     <div className="todo-container mx-6 pb-10">
       <div style={{maxWidth:"34rem"}} className='mx-auto mt-7 text-xs sm:text-base lg:text-lg text-darkest-grayish-blue dark:text-gray'>
         <ul className="w-full flex flex-col items-center relative bg-white dark:bg-very-dark-desaturated-blue transition-colors shadow-xl rounded">
         {todos.map(todo=>(
-          <TodoItem key={todo.id} checkBox={checkBox} todo={todo} error={error} errMessage={errMessage} deleteTodo={deleteTodo} updateTodo={updateTodo} />
+          <TodoItem key={todo.id} checkBox={checkBox} todo={todo} error={error} errMessage={errMessage} deleteTodo={deleteTodo} updateTodo={updateTodo} totalTodo={totalTodo} />
         ))}
           {todos.length > 0 ? 
           <li className="flex items-center justify-between h-12 px-5 lg:px-6 w-full text-xs lg:text-sm text-dark-grayish-blue dark:text-dark-grayish-blue-dark">
-            <div className="items-remainding">5 items left</div>
+            {/* <div className="items-remainding"> {todos.map(todo=>(todo.completed ==true? todos.length-1 : todos.length))} items left</div> */}
+            <div className="items-remainding"> {total} items left</div>
             <div className="complete-status hidden lg:flex font-bold">
               <p className="mx-3 cursor-pointer text-bright-blue">All</p>
               <p className="mx-3 cursor-pointer hover:text-darkest-grayish-blue dark:hover:text-gray">Active</p>

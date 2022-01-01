@@ -12,10 +12,13 @@ function App() {
   const [error, setError] = useState(false)
   const [errMessage, setErrMessage] = useState('') 
   const [id, setId] = useState('')
+  const [total, setTotal] = useState(0)
+
 
   useEffect(() => {
     getData();
     // eslint-disable-next-line
+    totalTodo()
   }, []);
   
   const getData = ()=>{
@@ -29,6 +32,21 @@ function App() {
       setError(true)
       setErrMessage(error.message)
     }
+  }
+
+  const totalTodo =()=>{
+    let counter = 0
+    setTotal(todos.length)
+    todos.forEach(todo=>{
+      if(!todo.completed){
+        return counter--
+      }if(todo.completed){
+        return counter++
+      }
+    })
+
+    setTotal((todos.length-counter)/2)
+    console.log(counter)
   }
   
   const inputTodo = (e) =>{
@@ -155,7 +173,7 @@ function App() {
   <div className='App bg-gray dark:bg-very-dark-blue font-josefinSans min-h-screen'>
     <Header modeToggle={modeToggle} darkMode={darkMode} />
     <Form submitTodo={submitTodo} inputTodo={inputTodo} input={input}/>
-    <Todos todos={todos} checkBox={checkBox} error={error} errMessage={errMessage} deleteTodo={deleteTodo} updateTodo={updateTodo}/>
+    <Todos todos={todos} checkBox={checkBox} error={error} errMessage={errMessage} deleteTodo={deleteTodo} updateTodo={updateTodo} totalTodo={totalTodo} total={total} />
   </div>
   )
 }
