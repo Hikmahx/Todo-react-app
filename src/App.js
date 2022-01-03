@@ -13,6 +13,7 @@ function App() {
   const [errMessage, setErrMessage] = useState('') 
   const [id, setId] = useState('')
   const [total, setTotal] = useState(0)
+  const [filterTodos, setfilterTodos] = useState ([])
 
 
   useEffect(() => {
@@ -189,12 +190,23 @@ function App() {
     })
   }
 
+  const displayCompleted = ()=>{
+    setfilterTodos(todos.filter(todo=> todo.completed === true))      
+  }
+
+  const displayActive = ()=>{
+    setfilterTodos(todos.filter(todo=> todo.completed !== true))      
+  }
+
+  const displayAll = ()=>{
+    setfilterTodos(todos)
+  }
 
   return( 
   <div className='App bg-gray dark:bg-very-dark-blue font-josefinSans min-h-screen'>
     <Header modeToggle={modeToggle} darkMode={darkMode} />
     <Form submitTodo={submitTodo} inputTodo={inputTodo} input={input}/>
-    <Todos todos={todos} checkBox={checkBox} error={error} errMessage={errMessage} deleteTodo={deleteTodo} updateTodo={updateTodo} totalTodo={totalTodo} total={total} clearCompleted={clearCompleted} />
+    <Todos todos={todos} checkBox={checkBox} error={error} errMessage={errMessage} deleteTodo={deleteTodo} updateTodo={updateTodo} totalTodo={totalTodo} total={total} clearCompleted={clearCompleted} displayCompleted={displayCompleted} displayActive={displayActive} setfilterTodos={setfilterTodos} filterTodos={filterTodos} displayAll={displayAll} />
   </div>
   )
 }
