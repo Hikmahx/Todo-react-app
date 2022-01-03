@@ -14,7 +14,6 @@ const Header = ({modeToggle, darkMode}) => {
       <div className="header-background w-full">
         <img src={darkMode? bgMobileLight : bgMobileDark} alt="header-img" className="relative inset-0 object-cover w-full lg:hidden" />
         <img src={darkMode? bgDesktopLight: bgDesktopDark} alt="header-img" className="relative inset-0 object-cover w-full hidden lg:block" />
-        {/* <div className={ "screen" + darkMode? "bg-gradient-to-r from-gradient-blue to-gradient-purple" : "bg-gradient-to-r from-gradient-purple to-gradient-blue" + " absolute inset-0 opacity-50"}></div> */}
       </div>
       <div className="w-full max-w-xl mx-auto absolute flex items-center justify-between py-11 xl:py-16 lg:mt-4 px-6 lg:px-4">
         <div className="logo uppercase text-white text-3xl lg:text-4xl font-bold tracking-wider lg:tracking-widest">todo</div>

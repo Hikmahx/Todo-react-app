@@ -12,27 +12,6 @@ const Todos = ({checkBox, todos, error, errMessage, deleteTodo, updateTodo, tota
     // eslint-disable-next-line
   }, [todos])
 
-
-  // const todoTotal = ()=>{
-
-  //   // todos.forEach((todo)=>{setTotal(total+1)})
-  //   console.log(todos.length)
-  //   // setTotal(todos.length)
-
-  //   todos.forEach(todo=>{
-  //     setTotal(total + 1)
-  //   })
-  // }
-
-  // todoTotal()
-
-  // const reducer = (state, action)=>{
-  //   return {count: state.count + 1}
-  // }
-
-  // const [state, dispatch] = useReducer(reducer, {count:0}, init)
-
-
   
   return (
     <div className="todo-container mx-6 pb-10">
@@ -43,7 +22,6 @@ const Todos = ({checkBox, todos, error, errMessage, deleteTodo, updateTodo, tota
         ))}
           {todos.length > 0 ? 
           <li className="flex items-center justify-between h-12 px-5 lg:px-6 w-full text-xs lg:text-sm text-dark-grayish-blue dark:text-dark-grayish-blue-dark">
-            {/* <div className="items-remainding"> {todos.map(todo=>(todo.completed ==true? todos.length-1 : todos.length))} items left</div> */}
             <div className="items-remainding"> {total} items left</div>
             <div className="complete-status hidden lg:flex font-bold">
               <p onClick={displayAll} className="mx-3 cursor-pointer text-bright-blue">All</p>

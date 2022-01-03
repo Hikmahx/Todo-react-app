@@ -103,7 +103,6 @@ function App() {
     formCross.classList.add('form-cancel')
     form.appendChild(formCross)
     formCross.addEventListener('click', ()=>{
-      // console.log('working')
       setId('')
       setInput('')
       form.lastElementChild.remove()
@@ -112,13 +111,10 @@ function App() {
 
   const deleteTodo=  (e)=>{
     let id = e.target.parentElement.parentElement.dataset.id
-    // console.log(e.target.parentElement.parentElement.dataset.id)
-    // setTodos(todos.filter((todo)=>todo!==item)) 
 
     axios.delete(`http://localhost:3000/todos/${id}`)
     .then(
       response=>{
-        // setTodos(todos.filter((item)=> item !== todos[id-1]))
         getData()
         setId('')
         setInput('')
@@ -174,7 +170,6 @@ function App() {
       if(todo.completed){
         let id = todo.id
 
-        // SAME AS DELETETODO(), UPDATE THE DELETETODO() INORDER TO PASS IT IN HERE
         axios.delete(`http://localhost:3000/todos/${id}`)
         .then(
           reponse=>{
