@@ -2,7 +2,7 @@ import React, {useEffect} from 'react'
 import TodoItem from '../components/TodoItem'
 
 
-const Todos = ({checkBox, todos, error, errMessage, deleteTodo, updateTodo, totalTodo, total, clearCompleted, displayCompleted, displayActive, displayAll, setfilterTodos, filterTodos}) => {
+const Todos = ({checkBox, todos, error, errMessage, deleteTodo, updateTodo, totalTodo, total, clearCompleted, displayCompleted, displayActive, displayAll, setfilterTodos, filterTodos, dragItem}) => {
 
 
   useEffect(() => {
@@ -12,6 +12,7 @@ const Todos = ({checkBox, todos, error, errMessage, deleteTodo, updateTodo, tota
     // eslint-disable-next-line
   }, [todos])
 
+  dragItem()
   
   return (
     <div className="todo-container mx-6 pb-10">
