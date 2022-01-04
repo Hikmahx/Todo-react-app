@@ -24,16 +24,14 @@ function App() {
   }, []);
   
   const getData = ()=>{
-    try {
       axios.get('http://localhost:3000/todos')
       .then(
         reponse=> setTodos(reponse.data)
       )
-      
-    } catch (error) {
-      setError(true)
-      setErrMessage(error.message)
-    }
+      .catch(error=>{
+        setError(true)
+        setErrMessage(error.message)
+      })
   }
 
   const totalTodo =()=>{
@@ -66,6 +64,10 @@ function App() {
           .then(
             reponse=> setTodos([...todos, reponse.data])
           )
+          .catch(error=>{
+            setError(true)
+            setErrMessage(error.message)
+          })    
         }else{
 
           axios.put(`http://localhost:3000/todos/${id}`, {
@@ -82,6 +84,10 @@ function App() {
             }
            }
           )
+          .catch(error=>{
+            setError(true)
+            setErrMessage(error.message)
+          })
         }
       }
       setInput('')
@@ -123,6 +129,10 @@ function App() {
         }
       }
     )
+    .catch(error=>{
+      setError(true)
+      setErrMessage(error.message)
+    })
   }
 
   const modeToggle =()=>{
@@ -163,6 +173,10 @@ function App() {
     .then(response=>{
       getData()
     })
+    .catch(error=>{
+      setError(true)
+      setErrMessage(error.message)
+    })
   }
 
   const clearCompleted= ()=>{
@@ -181,6 +195,10 @@ function App() {
             }    
           }
         )
+        .catch(error=>{
+          setError(true)
+          setErrMessage(error.message)
+        })  
       }
     })
   }
