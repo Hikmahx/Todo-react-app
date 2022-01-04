@@ -197,11 +197,40 @@ function App() {
     setfilterTodos(todos)
   }
 
+  const dragItem = ()=>{
+    let dragStartIndex;
+    let dragEndIndex;
+    let lis = document.querySelectorAll('.todo-item')
+
+    lis.forEach((li, index)=>{
+      li.addEventListener('dragstart', (e)=>{
+        dragStartIndex = index
+      })
+      li.addEventListener('dragenter', (e)=>{
+        e.target.parentElement.classList.add('bg-very-light-grayish-blue', 'dark:bg-very-dark-grayish-blue-dark')
+      })
+      li.addEventListener('dragleave', (e)=>{
+        e.target.parentElement.classList.remove('bg-very-light-grayish-blue', 'dark:bg-very-dark-grayish-blue-dark')
+      })
+      li.addEventListener('dragover', (e)=>{
+        e.preventDefault()
+      })
+      li.addEventListener('drop', (e)=>{
+        dragEndIndex = index
+        
+        const itemOne = lis[dragStartIndex]
+        const itemTwo = lis[dragEndIndex]
+        itemTwo.insertAdjacentElement("afterend", itemOne) 
+        e.target.parentElement.classList.remove('bg-very-light-grayish-blue', 'dark:bg-very-dark-grayish-blue-dark')
+      })
+    })
+  }
+
   return( 
   <div className='App bg-gray dark:bg-very-dark-blue font-josefinSans min-h-screen'>
     <Header modeToggle={modeToggle} darkMode={darkMode} />
     <Form submitTodo={submitTodo} inputTodo={inputTodo} input={input}/>
-    <Todos todos={todos} checkBox={checkBox} error={error} errMessage={errMessage} deleteTodo={deleteTodo} updateTodo={updateTodo} totalTodo={totalTodo} total={total} clearCompleted={clearCompleted} displayCompleted={displayCompleted} displayActive={displayActive} setfilterTodos={setfilterTodos} filterTodos={filterTodos} displayAll={displayAll} />
+    <Todos todos={todos} checkBox={checkBox} error={error} errMessage={errMessage} deleteTodo={deleteTodo} updateTodo={updateTodo} totalTodo={totalTodo} total={total} clearCompleted={clearCompleted} displayCompleted={displayCompleted} displayActive={displayActive} setfilterTodos={setfilterTodos} filterTodos={filterTodos} displayAll={displayAll} dragItem={dragItem} />
   </div>
   )
 }
