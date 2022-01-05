@@ -12,7 +12,11 @@
     "react-scripts": "4.0.3"
   },
   "scripts": {
+<<<<<<< HEAD
     "start": "concurrently \"react-scripts start\" \"json-server --watch db.json --port 3001\"",
+=======
+    "start": "concurrently \"react-scripts start\" \"json-server --watch src/db/db.json --port 3001\"",
+>>>>>>> be1264d10add51bf737c998d00d18725479fca20
     "dev": "nodemon server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
