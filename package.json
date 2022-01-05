@@ -12,13 +12,14 @@
     "react-scripts": "4.0.3"
   },
   "scripts": {
-    "start": "node server.js",
+    "start": "concurrently \"react-scripts start\" \"json-server --watch db.json --port 3000\"",
     "dev": "nodemon server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "json:server": "json-server --watch api/db.json"
   },
+  "proxy": "http://localhost:3000",
   "eslintConfig": {
     "extends": [
       "react-app",
