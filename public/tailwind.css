@@ -677,6 +677,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-bottom: 2.5rem;
 }
 
+.pr-20 {
+  padding-right: 5rem;
+}
+
 .text-center {
   text-align: center;
 }
@@ -852,6 +856,9 @@ Ensure the default browser behavior of the `hidden` attribute.
   .sm\:text-base {
     font-size: 1rem;
     line-height: 1.5rem;
+  }
+  .sm\:max-w-sm {
+    max-width: 24rem;
   }
 }
 
