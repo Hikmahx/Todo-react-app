@@ -12,7 +12,7 @@
     "react-scripts": "4.0.3"
   },
   "scripts": {
-    "start": "node server.js",
+    "start": "concurrently \"react-scripts start\" \"json-server --watch src/db/db.json --port 3001\"",
     "dev": "nodemon server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
