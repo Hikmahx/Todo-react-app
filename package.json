@@ -12,16 +12,7 @@
     "react-scripts": "4.0.3"
   },
   "scripts": {
-<<<<<<< HEAD
-<<<<<<< HEAD
-    "start": "concurrently \"react-scripts start\" \"json-server --watch db.json --port 3000\"",
-=======
-    "start": "node server.js",
->>>>>>> parent of cc63704... package updated, heroku procfile created
-    "dev": "nodemon server.js",
-=======
     "start": "react-scripts start",
->>>>>>> parent of a4c12d9... files updated for deployment
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
