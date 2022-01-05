@@ -3,6 +3,7 @@ import axios from 'axios'
 import Header from './components/Header'
 import Form from './components/Form'
 import Todos from './components/Todos'
+import Attribution from './Attribution'
 
 function App() { 
   const [todos, setTodos] = useState ([])
@@ -249,6 +250,7 @@ function App() {
     <Header modeToggle={modeToggle} darkMode={darkMode} />
     <Form submitTodo={submitTodo} inputTodo={inputTodo} input={input}/>
     <Todos todos={todos} checkBox={checkBox} error={error} errMessage={errMessage} deleteTodo={deleteTodo} updateTodo={updateTodo} totalTodo={totalTodo} total={total} clearCompleted={clearCompleted} displayCompleted={displayCompleted} displayActive={displayActive} setfilterTodos={setfilterTodos} filterTodos={filterTodos} displayAll={displayAll} dragItem={dragItem} />
+    <Attribution/>
   </div>
   )
 }
