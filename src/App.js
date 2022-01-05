@@ -25,7 +25,7 @@ function App() {
   }, []);
   
   const getData = ()=>{
-      axios.get('http://localhost:3000/todos')
+      axios.get('https://todo-react-app-json-server.herokuapp.com/todos')
       .then(
         reponse=> setTodos(reponse.data)
       )
@@ -58,7 +58,7 @@ function App() {
       if(input !== ''){
 
         if(id===''){
-          axios.post('http://localhost:3000/todos', {
+          axios.post('https://todo-react-app-json-server.herokuapp.com/todos', {
             todo: input, 
             completed: false
           })
@@ -71,7 +71,7 @@ function App() {
           })    
         }else{
 
-          axios.put(`http://localhost:3000/todos/${id}`, {
+          axios.put(`https://todo-react-app-json-server.herokuapp.com/todos/${id}`, {
             todo:input, 
             completed:false
           })
@@ -119,7 +119,7 @@ function App() {
   const deleteTodo=  (e)=>{
     let id = e.target.parentElement.parentElement.dataset.id
 
-    axios.delete(`http://localhost:3000/todos/${id}`)
+    axios.delete(`https://todo-react-app-json-server.herokuapp.com/todos/${id}`)
     .then(
       response=>{
         getData()
@@ -167,7 +167,7 @@ function App() {
     
     let text = e.target.parentElement.parentElement.nextElementSibling.textContent
     let id = e.target.parentElement.parentElement.parentElement.dataset.id
-    axios.put(`http://localhost:3000/todos/${id}`, {
+    axios.put(`https://todo-react-app-json-server.herokuapp.com/todos/${id}`, {
       todo:text,
       completed: checked
     })
@@ -185,7 +185,7 @@ function App() {
       if(todo.completed){
         let id = todo.id
 
-        axios.delete(`http://localhost:3000/todos/${id}`)
+        axios.delete(`https://todo-react-app-json-server.herokuapp.com/todos/${id}`)
         .then(
           reponse=>{
             getData()
