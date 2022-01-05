@@ -13,7 +13,11 @@
   },
   "scripts": {
 <<<<<<< HEAD
+<<<<<<< HEAD
     "start": "concurrently \"react-scripts start\" \"json-server --watch db.json --port 3000\"",
+=======
+    "start": "node server.js",
+>>>>>>> parent of cc63704... package updated, heroku procfile created
     "dev": "nodemon server.js",
 =======
     "start": "react-scripts start",
@@ -23,7 +27,6 @@
     "eject": "react-scripts eject",
     "json:server": "json-server --watch api/db.json"
   },
-  "proxy": "http://localhost:3000",
   "eslintConfig": {
     "extends": [
       "react-app",
