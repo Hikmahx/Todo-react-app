@@ -13,6 +13,7 @@ function App() {
   const [error, setError] = useState(false)
   const [errMessage, setErrMessage] = useState('') 
   const [id, setId] = useState('')
+  const [loading, setLoading] = useState(true)
   const [total, setTotal] = useState(0)
   const [filterTodos, setfilterTodos] = useState ([])
 
@@ -25,9 +26,14 @@ function App() {
   }, []);
   
   const getData = ()=>{
+      setLoading(true)
+
       axios.get('/api/todos/')
       .then(
-        reponse=> setTodos(reponse.data)
+        reponse=> {
+          setTodos(reponse.data)
+          setLoading(false)
+        }
       )
       .catch(error=>{
         setError(true)
@@ -58,18 +64,25 @@ function App() {
       if(input !== ''){
 
         if(id===''){
+          setLoading(true)
+
           axios.post('/api/todos/', {
             todo: input, 
             completed: false
           })
           .then(
-            reponse=> setTodos([...todos, reponse.data])
+            reponse=>{
+             setTodos([...todos, reponse.data]) 
+
+             setLoading(false)
+            } 
           )
           .catch(error=>{
             setError(true)
             setErrMessage(error.message)
           })    
         }else{
+          setLoading(true)
 
           axios.put(`/api/todos/${id}/`, {
             todo:input, 
@@ -82,7 +95,8 @@ function App() {
               setId('')
               if(document.querySelector('form').lastElementChild === document.querySelector('.form-cancel')){
               document.querySelector('form').lastElementChild.remove()
-            }
+              }
+              setLoading(false)
            }
           )
           .catch(error=>{
@@ -118,6 +132,7 @@ function App() {
 
   const deleteTodo=  (e)=>{
     let id = e.target.parentElement.parentElement.dataset.id
+    setLoading(true)
 
     axios.delete(`/api/todos/${id}/`)
     .then(
@@ -125,6 +140,8 @@ function App() {
         getData()
         setId('')
         setInput('')
+        setLoading(false)
+
         if(document.querySelector('form').lastElementChild === document.querySelector('.form-cancel')){
           document.querySelector('form').lastElementChild.remove()
         }
@@ -167,12 +184,16 @@ function App() {
     
     let text = e.target.parentElement.parentElement.nextElementSibling.textContent
     let id = e.target.parentElement.parentElement.parentElement.dataset.id
+
+    setLoading(true)
+
     axios.put(`/api/todos/${id}/`, {
       todo:text,
       completed: checked
     })
     .then(response=>{
       getData()
+      setLoading(false)
     })
     .catch(error=>{
       setError(true)
@@ -184,11 +205,13 @@ function App() {
     todos.forEach(todo=>{
       if(todo.completed){
         let id = todo.id
+        setLoading(true)
 
         axios.delete(`/api/todos/${id}/`)
         .then(
           reponse=>{
             getData()
+            setLoading(false)
             setId('')
             setInput('')
             if(document.querySelector('form').lastElementChild === document.querySelector('.form-cancel')){
@@ -249,7 +272,7 @@ function App() {
   <div className='App bg-gray dark:bg-very-dark-blue font-josefinSans min-h-screen'>
     <Header modeToggle={modeToggle} darkMode={darkMode} />
     <Form submitTodo={submitTodo} inputTodo={inputTodo} input={input}/>
-    <Todos todos={todos} checkBox={checkBox} error={error} errMessage={errMessage} deleteTodo={deleteTodo} updateTodo={updateTodo} totalTodo={totalTodo} total={total} clearCompleted={clearCompleted} displayCompleted={displayCompleted} displayActive={displayActive} setfilterTodos={setfilterTodos} filterTodos={filterTodos} displayAll={displayAll} dragItem={dragItem} />
+    <Todos todos={todos} checkBox={checkBox} error={error} errMessage={errMessage} deleteTodo={deleteTodo} updateTodo={updateTodo} totalTodo={totalTodo} total={total} clearCompleted={clearCompleted} displayCompleted={displayCompleted} displayActive={displayActive} setfilterTodos={setfilterTodos} filterTodos={filterTodos} displayAll={displayAll} dragItem={dragItem} loading={loading} />
     <Attribution/>
   </div>
   )

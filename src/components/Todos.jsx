@@ -1,8 +1,9 @@
 import React, {useEffect} from 'react'
 import TodoItem from '../components/TodoItem'
+import Loading from './Loading';
 
 
-const Todos = ({checkBox, todos, error, errMessage, deleteTodo, updateTodo, totalTodo, total, clearCompleted, displayCompleted, displayActive, displayAll, setfilterTodos, filterTodos, dragItem}) => {
+const Todos = ({checkBox, todos, error, errMessage, deleteTodo, updateTodo, totalTodo, total, clearCompleted, displayCompleted, displayActive, displayAll, setfilterTodos, filterTodos, dragItem, loading}) => {
 
 
   useEffect(() => {
@@ -16,6 +17,12 @@ const Todos = ({checkBox, todos, error, errMessage, deleteTodo, updateTodo, tota
   if(!error){
     return (
       <div className="todo-container mx-6 pb-10">
+        {loading &&
+          <div className="flex justify-center mx-auto mt-6 lg:mt-4">
+            <Loading />
+          </div>
+        }      
+
         <div style={{maxWidth:"34rem"}} className='mx-auto mt-7 text-xs sm:text-base lg:text-lg text-darkest-grayish-blue dark:text-gray'>
           <ul className="w-full flex flex-col items-center relative bg-white dark:bg-very-dark-desaturated-blue transition-colors shadow-xl rounded">
           {filterTodos.map(todo=>(
