@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "author": "Hikmah Yousuph",
   "private": true,
+  "proxy": "http://localhost:8000",
   "dependencies": {
     "axios": "^0.24.0",
     "cra-template": "1.1.2",
