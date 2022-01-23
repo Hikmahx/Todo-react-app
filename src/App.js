@@ -28,7 +28,7 @@ function App() {
   const getData = ()=>{
       setLoading(true)
 
-      axios.get('/api/todos/')
+      axios.get('http://localhost:3000/todos')
       .then(
         reponse=> {
           setTodos(reponse.data)
@@ -66,7 +66,7 @@ function App() {
         if(id===''){
           setLoading(true)
 
-          axios.post('/api/todos/', {
+          axios.post('http://localhost:3000/todos', {
             todo: input, 
             completed: false
           })
@@ -84,7 +84,7 @@ function App() {
         }else{
           setLoading(true)
 
-          axios.put(`/api/todos/${id}/`, {
+          axios.put(`http://localhost:3000/todos${id}/`, {
             todo:input, 
             completed:false
           })
@@ -134,7 +134,7 @@ function App() {
     let id = e.target.parentElement.parentElement.dataset.id
     setLoading(true)
 
-    axios.delete(`/api/todos/${id}/`)
+    axios.delete(`http://localhost:3000/todos${id}/`)
     .then(
       response=>{
         getData()
@@ -187,7 +187,7 @@ function App() {
 
     setLoading(true)
 
-    axios.put(`/api/todos/${id}/`, {
+    axios.put(`http://localhost:3000/todos${id}/`, {
       todo:text,
       completed: checked
     })
@@ -207,7 +207,7 @@ function App() {
         let id = todo.id
         setLoading(true)
 
-        axios.delete(`/api/todos/${id}/`)
+        axios.delete(`http://localhost:3000/todos${id}/`)
         .then(
           reponse=>{
             getData()
