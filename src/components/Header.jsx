@@ -1,13 +1,15 @@
-import React from 'react'
+import {useContext} from 'react'
 import bgMobileLight from '../assets/bg-mobile-light.jpg'
 import bgMobileDark from '../assets/bg-mobile-dark.jpg'
 import bgDesktopLight from '../assets/bg-desktop-light.jpg'
 import bgDesktopDark from '../assets/bg-desktop-dark.jpg'
 import moon from '../assets/icon-moon.svg'
 import sun from '../assets/icon-sun.svg'
+import TodoContext from '../context/TodoContext'
 
 
-const Header = ({modeToggle, darkMode}) => {
+const Header = () => {
+  const {modeToggle, darkMode} = useContext(TodoContext)
 
   return (
     <header className="w-full relative flex justify-center">

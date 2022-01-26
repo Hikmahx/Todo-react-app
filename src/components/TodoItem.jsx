@@ -1,10 +1,13 @@
-import React from 'react'
+import {useContext} from 'react'
 import check from "../assets/icon-check.svg"
 import pencil from "../assets/icon-pencil.svg"
 import cross from "../assets/icon-cross.svg"
+import TodoContext from '../context/TodoContext'
 
 
-const TodoItem = ({checkBox, todo, error, errMessage, deleteTodo, updateTodo, dragItem}) => {  
+const TodoItem = ({todo}) => {  
+  const {checkBox, deleteTodo, updateTodo, dragItem} = useContext(TodoContext)
+ 
   return (
     <li data-completed={todo.completed} data-id={todo.id} onDragStart={dragItem} draggable='true' className="todo-item relative flex items-center h-12 lg:h-16 px-5 lg:px-6 pr-20 w-full border-b border-light-grayish-blue dark:border-dark-grayish-blue-dark">
     <span  className="checkbox-wrapper relative cursor-pointer z-10">

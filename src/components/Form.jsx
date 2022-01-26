@@ -1,7 +1,9 @@
-import React from 'react'
+import {useContext} from 'react'
 import check from "../assets/icon-check.svg"
+import TodoContext from '../context/TodoContext'
 
-const Form = ({submitTodo, inputTodo, input}) => {
+const Form = () => {
+  const {submitTodo, inputTodo, input} = useContext(TodoContext)
 
   return (
     <div className="form-wrapper mx-6">

@@ -1,10 +1,11 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useContext} from 'react'
 import TodoItem from '../components/TodoItem'
 import Loading from './Loading';
+import TodoContext from '../context/TodoContext'
 
 
-const Todos = ({checkBox, todos, error, errMessage, deleteTodo, updateTodo, totalTodo, total, clearCompleted, displayCompleted, displayActive, displayAll, setfilterTodos, filterTodos, dragItem, loading}) => {
-
+const Todos = () => {
+  const {todos, error, errMessage, totalTodo, total, clearCompleted, displayCompleted, displayActive, displayAll, setfilterTodos, filterTodos, dragItem, loading} = useContext(TodoContext)
 
   useEffect(() => {
     totalTodo()
@@ -26,7 +27,7 @@ const Todos = ({checkBox, todos, error, errMessage, deleteTodo, updateTodo, tota
         <div style={{maxWidth:"34rem"}} className='mx-auto mt-7 text-xs sm:text-base lg:text-lg text-darkest-grayish-blue dark:text-gray'>
           <ul className="w-full flex flex-col items-center relative bg-white dark:bg-very-dark-desaturated-blue transition-colors shadow-xl rounded">
           {filterTodos.map(todo=>(
-            <TodoItem key={todo.id} checkBox={checkBox} todo={todo} error={error} errMessage={errMessage} deleteTodo={deleteTodo} updateTodo={updateTodo} totalTodo={totalTodo} />
+            <TodoItem key={todo.id} todo={todo} />
           ))}
             {todos.length > 0 ? 
             <li className="flex items-center justify-between h-12 px-5 lg:px-6 w-full text-xs lg:text-sm text-dark-grayish-blue dark:text-dark-grayish-blue-dark">
