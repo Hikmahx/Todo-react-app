@@ -8,11 +8,8 @@ This is a solution to the [Todo app challenge on Frontend Mentor](https://www.fr
   - [The challenge](#the-challenge)
   - [Screenshot](#screenshot)
   - [Links](#links)
-- [My process](#my-process)
   - [Built with](#built-with)
-  - [What I learned](#what-i-learned)
-  - [Continued development](#continued-development)
-  - [Useful resources](#useful-resources)
+  - [My process](#my-process)
 - [Author](#author)
 
 ## Overview
@@ -95,9 +92,8 @@ this function runs when the components first mount and every time there is a cha
 The value of the total was appended into the UI, changing when items are added or removed or when checked.
 
 - clearCompleted(): first, I added a click event on the clearCompleted div which is the same name as the function. Next after passing up the props, I created the function in App.js and looped through the todos, searching for if any of them are completed, if they are, each of them will be deleted using:  axios.delete(`http://localhost:3000/todos/${id}`)
-*The thing about this function is it is the same as deleteTodo()
 
-- displayCompleted, -Active, -All: I created another state called filterTodos which is very useful. I got this from dev ed's todo video, so I used that instead of using display: 'flex' like I initially planned. The reason I didn't use setTodos is bcos I didn't want the data to be lost when filtering. The setfilterTodos state will stand in place of the todos (code changed for it to replace todo) when mapping to a function.  the filterTodos gotten from the todos serves as a placeholder, as a rep of todos. 
+- displayCompleted, -Active, -All: I created another state called **filterTodos** which is very useful. The reason I didn't use setTodos is bcos I didn't want the data to be lost when filtering. The setfilterTodos state will stand in place of the todos (code changed for it to replace todo) when mapping to a function.  the filterTodos gotten from the todos serves as a placeholder, as a rep of todos. 
 the filterTodos changes back to the current todos whennever there is a change in todos. This is enabled in the Todos.jsx useEffect:  
 ```js
 useEffect(() => {
@@ -109,17 +105,14 @@ useEffect(() => {
   ```
 Onload, it returns all todos. Any change in todos causes it to return all todos
 
-- dragItems: this is a collection of functions for drag and drop. To initial it, I add a dragStart to the todoItem and initiated it in todo.jsx.  I looped through the list and added 5 drag and drop event listeners. A bit of problem with the drop causing it to missteps when dragged upwards but none when dragged downwards. It is because of the code:
+- dragItems(): this is a collection of functions for drag and drop. To initial it, I add a **dragStart** to the todoItem and initiated it in todo.jsx.  I looped through the list and added 5 drag and drop event listeners. A bit of problem with the drop causing it to missteps when dragged upwards but none when dragged downwards. It is because of the code:
+- ```js
 itemTwo.insertAdjacentElement("afterend", itemOne) 
+```
 this tells the program to only insert the li after the li in the drop site. I don't know how to correct this slight error
-error handling: I had .catch() for any error in the rest API request, modified the errMessage display by transferring the code to the todo instead of todoitem.jsx bcos I don't want it to be in the ul when there is an error. Also bcos it causes multiple error messages
+error handling: I had .catch() for any error in the rest API request, modified the errMessage display by transferring the code to the todo instead of todoitem.jsx bcos I don't want it to be in the ul when there is an error. Also bcos it causes multiple error messages.
 
-finally, I had attribution and I'm done!!!
-
-or not 
-I created a Django backend, after doing so, I added a proxy in the package.json  under private ie 'proxy':'localhost:800'
-After that, I changed the HTTP requests from 'localhost:3000' to 'api/todo/' based on the endpoint configured in Django urls.py
-Since it may take some time, I decided to add a loading component that displays just before the request and removes after the request is fulfilled
+Finally, I refactored everything from state to contextAPI.
 
 
 ## Author
