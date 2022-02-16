@@ -1,70 +1,130 @@
-# Getting Started with Create React App
+# Frontend Mentor - Todo app solution
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a solution to the [Todo app challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/todo-app-Su1_KokOW). Frontend Mentor challenges help you improve your coding skills by building realistic projects. 
 
-## Available Scripts
+## Table of contents
 
-In the project directory, you can run:
+- [Overview](#overview)
+  - [The challenge](#the-challenge)
+  - [Screenshot](#screenshot)
+  - [Links](#links)
+- [My process](#my-process)
+  - [Built with](#built-with)
+  - [What I learned](#what-i-learned)
+  - [Continued development](#continued-development)
+  - [Useful resources](#useful-resources)
+- [Author](#author)
 
-### `yarn start`
+## Overview
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### The challenge
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Users should be able to:
 
-### `yarn test`
+- View the optimal layout for the app depending on their device's screen size
+- See hover states for all interactive elements on the page
+- Add new todos to the list
+- Mark todos as complete
+- Update old todos
+- Delete todos from the list
+- Filter by all/active/complete todos
+- Clear all completed todos
+- Toggle light and dark mode
+- Drag and drop to reorder items on the list
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `yarn build`
+### Screenshot
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+![](./src/assets/todo-react-app.png)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+This is the screenshot of my solution
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Links
 
-### `yarn eject`
+- Solution URL: [Add solution URL here](https://www.frontendmentor.io/solutions/todo-app-react-django-B86ogFKWc)
+- Live Django URL: [Add live site URL here](https://todo-react-django-app.herokuapp.com/)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Built with
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Semantic HTML5 markup
+- CSS custom properties
+- Flexbox
+- CSS Grid
+- Mobile-first workflow
+- Axios
+- [React](https://reactjs.org/) - JS library
+- [Tailwindcss](https://tailwindcss.com/) - CSS framework
+- [JSON Server](https://www.npmjs.com/package/json-server) - full fake REST API 
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### My process
+- After finishing the UI section of the project, I added functionality to the form. Before that, I implemented a complete state on the todo item clicked (the checkbox icon at the left), using the **checked** state to toggle between the true and false. 
 
-## Learn More
+- Next, the `input` field was manipulated by using the **input** state which empties *onsubmit*( on the condition that there is something input). At first, when I did this, I had to use `setTodos([...todos, input])` to add each input into the todos array which I then mapped in **Todo.jsx** to each todo item. 
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- When the todos are displayed nicely in the UI, I installed JSON server to enable a fake REST API, creating a **db.json** which was watched by the server and allowing the todo to persist after reloading. Initially, I added a list of todos in the JSON file and allowed it to display, consisting of a todo, an id, and a complete. After that, `GET` the data and setTodos. I used `useEffect` to display the latest todo after the component mounts.
+I enabled the error in case there is one.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- In my `submitTodo()`, I updated it to allow it to
+`POST` an input into the server and update todos. Then I enabled the delete, then update. For the update, firstly I created a function that gets the id and text from the todo item, adds them to a state, and input them in the form. I then update my submitTodo to check if it's a new todo (no id yet: 
+`if(id===''){...}`) ie  the former `submit` code was wrapped in this conditional and the 'else' is for the `PUT` request, for updating the clicked todo.
 
-### Code Splitting
+- I had some issues like the page reloads whenever a `POST` or `PUT` request is made. So I installed **axios**. I remove the async await when using axios
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- In the updated code:
+> Create todo: `setTodos([...todos, reponse.data])`
 
-### Analyzing the Bundle Size
+> Update todo: `setTodos(todos.map(todo=>(todo.id==id? {id, todo:input} : todo)))` (after setting the state of the id and the input)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+> Delete todo: `setTodos(todos.filter((item)=> item !== todos[id-1]))`
 
-### Making a Progressive Web App
+- In `updateTodo()`, I modified it so it adds a cancel/cross btn in the form. Only one of such btns appears in the form because a listener was added to it which set the form from `PUT` to `POST`, clearing the **id** and **input** fields and removing the cancel btn after it's clicked. I also removed the cancel btn and the id when the `PUT` request is fulfilled so that the input now submits to `POST` again.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- The delete request was having some issues, so
+instead of the initial code, in the then(), I simply returned the `getData()`. I had to wrap the form-cancel btn remove in a conditional so the `<input>` field doesn't mistakenly remove on the delete request.
 
-### Advanced Configuration
+- For the `checkbox()`, I updated it to a `PUT` request which changes the state of the 'completed'  entry 'checked' to true or false.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- In the items remaining, I was a bit stuck. I use the function "totalTodo " and created a state "total". In the totalTodo, I set a counter and setTotal to the todos' length. I looped through the todos and checked if they were true or false. If true, I increment and vice versa. I then set Total to todos'length minus the counter and divided them by 2, ie 
+:
+```js    
+setTotal((todos.length-counter)/2)
+```
 
-### Deployment
+this function runs when the components first mount and every time there is a change in the todos array(I had this to the Todo.jsx to not create new errors in the App.js
+The value of the total was appended into the UI, changing when items are added or removed or when checked.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- clearCompleted(): first, I added a click event on the clearCompleted div which is the same name as the function. Next after passing up the props, I created the function in App.js and looped through the todos, searching for if any of them are completed, if they are, each of them will be deleted using:  axios.delete(`http://localhost:3000/todos/${id}`)
+*The thing about this function is it is the same as deleteTodo()
 
-### `yarn build` fails to minify
+- displayCompleted, -Active, -All: I created another state called filterTodos which is very useful. I got this from dev ed's todo video, so I used that instead of using display: 'flex' like I initially planned. The reason I didn't use setTodos is bcos I didn't want the data to be lost when filtering. The setfilterTodos state will stand in place of the todos (code changed for it to replace todo) when mapping to a function.  the filterTodos gotten from the todos serves as a placeholder, as a rep of todos. 
+the filterTodos changes back to the current todos whennever there is a change in todos. This is enabled in the Todos.jsx useEffect:  
+```js
+useEffect(() => {
+    totalTodo()
+    // eslint-disable-next-line
+    setfilterTodos(todos)
+    // eslint-disable-next-line
+  }, [todos])
+  ```
+Onload, it returns all todos. Any change in todos causes it to return all todos
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- dragItems: this is a collection of functions for drag and drop. To initial it, I add a dragStart to the todoItem and initiated it in todo.jsx.  I looped through the list and added 5 drag and drop event listeners. A bit of problem with the drop causing it to missteps when dragged upwards but none when dragged downwards. It is because of the code:
+itemTwo.insertAdjacentElement("afterend", itemOne) 
+this tells the program to only insert the li after the li in the drop site. I don't know how to correct this slight error
+error handling: I had .catch() for any error in the rest API request, modified the errMessage display by transferring the code to the todo instead of todoitem.jsx bcos I don't want it to be in the ul when there is an error. Also bcos it causes multiple error messages
+
+finally, I had attribution and I'm done!!!
+
+or not 
+I created a Django backend, after doing so, I added a proxy in the package.json  under private ie 'proxy':'localhost:800'
+After that, I changed the HTTP requests from 'localhost:3000' to 'api/todo/' based on the endpoint configured in Django urls.py
+Since it may take some time, I decided to add a loading component that displays just before the request and removes after the request is fulfilled
+
+
+## Author
+
+- Github - [Hikmah Yousuph](https://github.com/Hikmahx)
+- Frontend Mentor - [@Hikmahx](https://www.frontendmentor.io/profile/Hikmahx)
+- Email - [hikmayousuph@gmail.com](hikmayousuph@gmail.com)
+- LinkedIn - [Hikmah Yousuph](linkedin.com/in/hikmah-yousuph-449467204/)
