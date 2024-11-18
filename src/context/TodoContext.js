@@ -1,5 +1,8 @@
 import { createContext, useEffect, useState } from 'react';
 import axios from 'axios';
+import { collection, getDocs } from 'firebase/firestore'; // 
+import { db } from '../utils/firebase';
+
 
 const TodoContext = createContext();
 
@@ -23,19 +26,25 @@ export const TodoProvider = ({ children }) => {
     // eslint-disable-next-line
   }, []);
 
-  const getData = () => {
+  const getData = async () => {
     setLoading(true);
-
-    axios
-      .get('http://localhost:3000/todos')
-      .then(reponse => {
-        setTodos(reponse.data);
-        setLoading(false);
-      })
-      .catch(error => {
-        setError(true);
-        setErrMessage(error.message);
+    try {
+      const querySnapshot = await getDocs(collection(db, 'todos'));
+      const todoList = querySnapshot.docs.map((doc) => {
+        const data = doc.data();
+        return {
+          id: doc.id,
+          ...data,
+        };
       });
+
+      setTodos(todoList);
+      setLoading(false);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      setError('Error fetching data: ' + error.message);
+      setLoading(false);
+    }
   };
 
   const totalTodo = () => {
